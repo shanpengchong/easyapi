@@ -1,0 +1,47 @@
+*/target/
+*/*/target/
+/target/
+logs/
+
+### Maven dir ###
+.mvn
+mvnw
+mvnw.cmd
+
+### Compiled dir ###
+.project
+.myeclipse
+.settings
+*.class
+.classpath
+.metadata
+*.iml
+
+target/
+*.class
+/classes/
+/yifei-shortvideo-apidoc/
+*-apidoc/
+*-apidoc
+=======
+application.log
+
+
+### Mac OS ###
+.DS_Store
+*.DS_Store
+
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.ipr
+.springBeans
+
+### log dir ###
+*.log
+.logs
+/overseas-investment-logs/
+*.gz
+
+/short-video-backCenter-apidoc/

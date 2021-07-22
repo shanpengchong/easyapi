@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="82px" height="82px" viewBox="0 0 82 82" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>编组 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="82" height="82" rx="4"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="82" height="82" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标" transform="translate(-74.000000, -161.000000)">
+            <g id="编组-2" transform="translate(74.000000, 161.000000)">
+                <use id="矩形备份" stroke="#E2E2E2" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" stroke-linecap="square" stroke-linejoin="bevel" stroke-dasharray="4" xlink:href="#path-1"></use>
+                <rect id="矩形-copy-4备份" fill="#E2E2E2" x="22" y="40" width="38" height="2"></rect>
+                <rect id="矩形-copy-5备份" fill="#E2E2E2" x="40" y="22" width="2" height="38"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
