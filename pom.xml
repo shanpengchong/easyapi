@@ -108,17 +108,14 @@
         </plugins>
     </build>
 	<distributionManagement>
-		<repository>
-			<!--id的名字可以任意取，但是在setting文件中的属性<server>的ID与这里一致-->
-			<id>ossrh</id>
-			<!--指向仓库类型为host(宿主仓库）的储存类型为Release的仓库-->
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</repository>
 		<snapshotRepository>
 			<id>ossrh</id>
-			<!--指向仓库类型为host(宿主仓库）的储存类型为Snapshot的仓库-->
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
 	</distributionManagement>
 
 	<profiles>
@@ -129,11 +126,11 @@
 					<plugin>
 						<groupId>org.sonatype.plugins</groupId>
 						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>${nexus.staging.maven.plugin}</version>
+						<version>1.6.7</version>
 						<extensions>true</extensions>
 						<configuration>
 							<serverId>ossrh</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
 							<autoReleaseAfterClose>true</autoReleaseAfterClose>
 						</configuration>
 					</plugin>
@@ -179,6 +176,17 @@
 								</goals>
 							</execution>
 						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>2.5.3</version>
+						<configuration>
+							<autoVersionSubmodules>true</autoVersionSubmodules>
+							<useReleaseProfile>false</useReleaseProfile>
+							<releaseProfiles>release</releaseProfiles>
+							<goals>deploy</goals>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
