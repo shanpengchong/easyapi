@@ -12,10 +12,44 @@
 	<artifactId>easyapi</artifactId>
 	<version>0.6.7</version>
 	<name>easyapi</name>
-	<description>Demo project for Spring Boot</description>
+	<url>https://github.com/shanpengchong/easyapi</url>
+	
+	<licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+	
+	<!--scm信息-->
+	<scm>
+		<url>http://easyutil.cn</url>
+		<connection>scm:git:https://github.com/shanpengchong/easyapi.git</connection>
+		<developerConnection>scm:git:https://github.com/shanpengchong/easyapi.git</developerConnection>
+	</scm>
+	
+	<!--发布者信息-->
+	<developers>
+		<developer>
+			<name>easyutil</name>
+			<email>547595531@qq.com</email>
+			<organization>http://easyutil.cn</organization>
+			<organizationUrl>http://easyutil.cn</organizationUrl>
+		</developer>
+	</developers>
 
 	<properties>
+		<charset>UTF-8</charset>
 		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>${charset}</project.build.sourceEncoding>
+		<nexus.staging.maven.plugin>1.6.7</nexus.staging.maven.plugin>
+		<maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
+		<maven.compiler.plugin.version>2.5</maven.compiler.plugin.version>
+		<maven.surefire.plugin.version>2.5</maven.surefire.plugin.version>
+		<maven.source.plugin.version>2.2.1</maven.source.plugin.version>
+		<maven.javadoc.plugin.version>2.9.1</maven.javadoc.plugin.version>
+		<maven.gpg.plugin.version>1.5</maven.gpg.plugin.version>
 	</properties>
 
 	<dependencies>
@@ -64,26 +98,175 @@
 
 	<build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
+            <!--&lt;!&ndash; doc plugin,Maven API文档生成插件 &ndash;&gt;
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<configuration>
+				   <show>private</show>
+					<nohelp>true</nohelp>
+					 <charset>UTF-8</charset>
+				   <encoding>UTF-8</encoding>
+					<docencoding>UTF-8</docencoding>
+				   <additionalparam>-Xdoclint:none</additionalparam>
+					&lt;!&ndash; TODO 临时解决不规范的javadoc生成报错,后面要规范化后把这行去掉 &ndash;&gt;
+				</configuration>
+			   <executions>
+				   <execution>
+						<phase>package</phase>
+					   <goals>
+						   <goal>jar</goal>
+					   </goals>
+				  </execution>
+			   </executions>
+			</plugin>
+			
+			&lt;!&ndash; resources plugin,Maven 资源插件 &ndash;&gt;
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			&lt;!&ndash; compiler plugin,Maven 编译插件 &ndash;&gt;
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+			
+			&lt;!&ndash; gpg plugin,用于签名认证 &ndash;&gt;
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				&lt;!&ndash;<configuration>
+					<skip>true</skip>
+				</configuration>&ndash;&gt;
+				<executions>
+					<execution>
+						<id>gpg</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			&lt;!&ndash;staging puglin,用于自动执行发布阶段(免手动)&ndash;&gt;
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					&lt;!&ndash; 这里的id必须要和全局配置中的release id 一致 &ndash;&gt;
+					<serverId>sonatype_releases</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					&lt;!&ndash; 如果希望发布后自动执行close和release操作，此处可以调整为true &ndash;&gt;
+					<autoReleaseAfterClose>false</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			
+			&lt;!&ndash; release plugin,用于发布到release仓库部署插件 &ndash;&gt;
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.4.2</version>
+			</plugin>-->
+			
         </plugins>
     </build>
 	<distributionManagement>
 		<repository>
 			<!--id的名字可以任意取，但是在setting文件中的属性<server>的ID与这里一致-->
-			<id>rdc-releases</id>
+			<id>ossrh</id>
 			<!--指向仓库类型为host(宿主仓库）的储存类型为Release的仓库-->
-			<url>https://packages.aliyun.com/maven/repository/2007317-release-6m6vJS/</url>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</repository>
 		<snapshotRepository>
-			<id>rdc-snapshots</id>
+			<id>ossrh</id>
 			<!--指向仓库类型为host(宿主仓库）的储存类型为Snapshot的仓库-->
-			<url>https://packages.aliyun.com/maven/repository/2007317-snapshot-5VWKeN/</url>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</snapshotRepository>
 	</distributionManagement>
+
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>${nexus.staging.maven.plugin}</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>${maven.source.plugin.version}</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${maven.javadoc.plugin.version}</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+								<configuration>
+									<additionalparam>-Xdoclint:none</additionalparam>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven.gpg.plugin.version}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

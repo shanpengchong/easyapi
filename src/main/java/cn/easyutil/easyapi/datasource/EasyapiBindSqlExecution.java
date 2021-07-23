@@ -26,21 +26,6 @@ import java.util.Set;
 
 import javax.sql.DataSource;
 
-/**
- * easySql的具体执行类 内置基础增删改查和分页,事务</br>
- * 在使用之前请务必了解一下内容:</br>
- * 一:本工具提供了以下4个注解</br>
- * &nbsp;&nbsp;&nbsp;1:Tne(name="") 在你需要操作的bean类上添加，用来标注数据库表名,此为必填项</br>
- * &nbsp;&nbsp;&nbsp;2:Tid 在你需要操作的bean类属性上添加，用来标注数据库表主键名称，此为必填项</br>
- * &nbsp;&nbsp;&nbsp;3:Tfd(name="")
- * 在你需要操作的bean类属性上添加，用来标注数据库表字段,如一致，则非必填</br>
- * &nbsp;&nbsp;&nbsp;4:Tie
- * 在你需要操作的bean类属性上添加，用来标注数据库表中没有的字段，新增时不会添加进表</br>
- * 二:如果你需要操作的类属性有非基本数据，则无法使用本工具
- * 
- * @author shyFly
- *
- */
 public class EasyapiBindSqlExecution {
 	private DataSource dataSource;
 	/** 当前连接 */
@@ -399,9 +384,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 自定义语句查询
-	 * 
-	 * @param sql
-	 * @return
 	 */
 	public <T> T queryOne(String sql, Class<T> clazz) {
 		Object[] objs = new Object[] {};
@@ -452,9 +434,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 自定义语句查询
-	 * 
-	 * @param sql
-	 * @return
 	 */
 	public List<Map<String, Object>> query(String sql) {
 		Object[] objs = new Object[] {};
@@ -464,7 +443,6 @@ public class EasyapiBindSqlExecution {
 	/**
 	 * 自定义语句查询
 	 * 
-	 * @param sql
 	 * @return	返回结果集
 	 */
 	public <T> List<T> query(String sql, Class<T> clazz) {
@@ -564,9 +542,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 自定义语句修改
-	 * 
-	 * @param sql
-	 * @return
 	 */
 	public int update(String sql) {
 		Object[] objs = new Object[] {};
@@ -575,8 +550,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 依据不为空的条件查询多条数据
-	 * 
-	 * @return
 	 */
 	public <T> List<T> select(T obj) {
 		return select(new EasyapiBindSQLExecuter(obj));
@@ -584,11 +557,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 依据不为空的字段查询,支持排序
-	 * 
-	 * @param obj
-	 * @param orderByTfd
-	 * @param desc
-	 * @return
 	 */
 	public <T> List<T> select(T obj, String orderByTfd, boolean desc) {
 		return select(new EasyapiBindSQLExecuter(obj).orderBy(orderByTfd, desc));
@@ -596,8 +564,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 依据不为空的条件查询多条数据
-	 * 
-	 * @return
 	 */
 	public <T> T selectOne(T obj) {
 		return selectOne(obj, null, false);
@@ -605,8 +571,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 依据不为空的条件查询多条数据
-	 * 
-	 * @return
 	 */
 	public <T> T selectOne(EasyapiBindSQLExecuter executer) {
 		List<T> list = select(executer.setLimitStart(1));
@@ -618,11 +582,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 依据不为空属性查询，支持聚合与排序
-	 * 
-	 * @param obj
-	 * @param orderByTfd
-	 * @param desc
-	 * @return
 	 */
 	public <T> T selectOne(T obj, String orderByTfd, boolean desc) {
 		EasyapiBindSQLExecuter executer = new EasyapiBindSQLExecuter(obj);
@@ -643,7 +602,6 @@ public class EasyapiBindSqlExecution {
 	 * 
 	 * @param executer
 	 *            sql执行器
-	 * @return
 	 */
 	public <T> List<T> select(EasyapiBindSQLExecuter executer) {
 		if (executer.getBean() == null) {
@@ -663,9 +621,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 查询总条数
-	 * 
-	 * @param obj
-	 * @return
 	 */
 	public <T> Double selectCount(T obj) {
 		return selectCount(new EasyapiBindSQLExecuter(obj));
@@ -779,13 +734,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 分页查询，支持排序
-	 * 
-	 * @param obj
-	 * @param currentPageParam
-	 * @param showCountParam
-	 * @param orderByTfd
-	 * @param desc
-	 * @return
 	 */
 	public <T> EasyApiBindSqlResult<T> listPage(T obj, Integer currentPageParam, Integer showCountParam,
 												String orderByTfd, boolean desc) {
@@ -794,11 +742,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 分页查询，支持聚合
-	 * 
-	 * @param obj
-	 * @param currentPageParam
-	 * @param showCountParam
-	 * @return
 	 */
 	public <T> EasyApiBindSqlResult<T> listPage(T obj, Integer currentPageParam, Integer showCountParam) {
 		return listPage(new EasyapiBindSQLExecuter(obj), currentPageParam, showCountParam);
@@ -806,11 +749,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 拼接分页
-	 * 
-	 * @param sql
-	 * @param currentPage
-	 * @param showCount
-	 * @return
 	 */
 	private String getListPageSql(String sql, int currentPage, int showCount) {
 		StringBuffer pageSql = new StringBuffer();
@@ -830,9 +768,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 一次插入多条
-	 * 
-	 * @param objs
-	 * @return
 	 */
 	public <T> void insert(Collection<T> objs) {
 		if (objs == null || objs.size() == 0) {
@@ -884,9 +819,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 添加数据(自动补填id)
-	 * 
-	 * @param obj
-	 * @return
 	 */
 	public <T> T insert(T obj) {
 		// 自增主键不允许加入
@@ -1019,8 +951,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 修改数据（依据id修改）
-	 * 
-	 * @return
 	 */
 	public <T> Integer update(EasyapiBindSQLExecuter executer) {
 		Object obj = executer.getBean();
@@ -1142,8 +1072,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 获取表名
-	 * 
-	 * @param <T>
 	 */
 	private <T> String getTne(T t) {
 		Class<?> tClass = t.getClass();
@@ -1171,8 +1099,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 获取主键id的名称
-	 * 
-	 * @param <T>
 	 */
 	@SuppressWarnings("rawtypes")
 	private <T> String getTidName(Object t) {
@@ -1204,8 +1130,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 获取主键id的值
-	 * 
-	 * @param <T>
 	 */
 	@SuppressWarnings("rawtypes")
 	private <T> Object getTidValue(Object t) {
@@ -1229,8 +1153,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 获取原类属性id的名字
-	 * 
-	 * @param <T>
 	 */
 	@SuppressWarnings("rawtypes")
 	private <T> String getTidJavaName(Object t) {
@@ -1375,8 +1297,6 @@ public class EasyapiBindSqlExecution {
 	/**
 	 * 将map转成bean
 	 * 
-	 * @param list
-	 * @param obj
 	 * @return
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -1455,10 +1375,6 @@ public class EasyapiBindSqlExecution {
 
 	/**
 	 * 将map转成bean
-	 * 
-	 * @param list
-	 * @param clazz
-	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> List<T> mapToBean(List<Map<String, Object>> list, Class<T> clazz) {
